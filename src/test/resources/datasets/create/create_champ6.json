@@ -1,0 +1,11 @@
+{
+  "championName": "Champ6",
+  "role": "Tireur",
+  "lifePoints": 115,
+  "abilities": [
+    {
+      "ability": "tir fragmenté",
+      "damage": 40
+    }
+  ]
+}

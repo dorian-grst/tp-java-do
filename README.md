@@ -1,4 +1,4 @@
-# Pokedex java boilerplate
+# LeagueOfLegends java boilerplate
 
 # Introduction
 
@@ -147,13 +147,14 @@ Si le json est invalide, le serveur répond avec une erreur 400.
       "ability": "Vieillissement accéléré",
       "damage": 5
     }
+  ]
 }
 ```
 
 # US 2 - Ajouter des champions à une équipe
 
 En tant qu'utilisateur, je souhaite préparer une partie.
-Pour cela, je souhaite indiquer pour chaque équipe la liste des champions qui en fera partie et la lane sur laquel 
+Pour cela, je souhaite indiquer pour chaque équipe la liste des champions qui en fera partie et la lane sur laquel
 ils seront placés.
 J'envoie donc un json qui contient le nom de l'équipe que je veux remplir, et le nom des champions et leur placement.
 
@@ -167,6 +168,37 @@ Sinon, c'est un code 200.
 
 Exemple de requête : `/api/team`
 
+## Spécifications d'interfaces
+
+### Requete
+
+```json
+{
+  "teamName": "BLEU",
+  "championsDistribution": [
+    {
+      "championName": "Nasus",
+      "lane": "TOP"
+    },
+    {
+      "championName": "Nami",
+      "lane": "BOT"
+    },
+    {
+      "championName": "Pantheon",
+      "lane": "JUNGLER"
+    },
+    {
+      "championName": "Samira",
+      "lane": "BOT"
+    },
+    {
+      "championName": "Syndra",
+      "lane": "MID"
+    }
+    ]
+}
+```
 
 # US 3 - Lancer la partie
 
@@ -174,52 +206,10 @@ En tant qu'utilisateur, je souhaite "lancer une partie"
 Ne plus autoriser de changements dans les équipes.
 La partie commence si et seulement si j'ai deux équipes de 5 champions.
 
-Si tout est bon, le serveur me renvoit un code 200 avec le message suivant : 
+Si tout est bon, le serveur me renvoit un code 200 avec le message suivant :
 "Bienvenue sur la Faille de l'Invocateur !"
 
 Exemple de requête : `/api/begin`
-
-# US 4 - Rechercher les champions par lane
-
-En tant qu'utilisateur, je souhaite récupérer la liste de champions qui sont sur la même lane.
-J'envoie une requète de
-type `GET` ayant pour paramètre le `laneType` contenant le type à rechercher.
-
-Le serveur doit envoyer la liste des champions qui sont actuellement sur la lane demandée.
-
-Si aucun champion n'est sur cette lane, une liste vide est renvoyée avec le code 200.
-
-Si le type de lane recherché n'est pas dans la liste de type possible, 
-le serveur renvoie une requête vide avec le code d'erreur 400.
-
-Exemple de requête : `/api/searchByType?type=ELECTRIC`
-
-## Spécifications d'interfaces
-
-### Réponse
-
-```json
-{
-  "result": [
-    {
-      "name": "Pikachu",
-      "lifePoints": 80,
-      "powers": [
-        {
-          "name": "gnaw",
-          "damageType": "NEUTRAL",
-          "damage": 30
-        },
-        {
-          "name": "thunder jolt",
-          "damageType": "ELECTRIC",
-          "damage": 50
-        }
-      ]
-    }
-  ]
-}
-```
 
 # US 4 - Calculer le vainqueur d'une lane
 
@@ -258,7 +248,7 @@ Attention, la prédiction ne peut se faire que lorsqu'une partie a commencé.
     },
     {
       "name": "BOT",
-      "winningTeam": "NONE"
+      "winningTeam": "BLUE"
     }
   ]
 }

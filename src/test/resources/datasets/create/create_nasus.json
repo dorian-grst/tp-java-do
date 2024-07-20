@@ -1,0 +1,11 @@
+{
+  "championName": "Nasus",
+  "role": "COMBATTANT",
+  "lifePoints": 100,
+  "abilities": [
+    {
+      "ability": "buveuse d'âme",
+      "damage": 30
+    }
+  ]
+}

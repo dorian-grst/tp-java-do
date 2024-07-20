@@ -1,0 +1,9 @@
+{
+    "championName": "Pantheon",
+    "abilities": [
+        {
+            "ability": "coup de lance 2",
+            "damage": 45
+        }
+    ]
+}

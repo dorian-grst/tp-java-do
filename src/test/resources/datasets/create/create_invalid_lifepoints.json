@@ -1,0 +1,11 @@
+{
+  "championName": "Nami",
+  "role": "SUPPORT",
+  "lifePoints": "notANumber",
+  "abilities": [
+    {
+      "ability": "boule d'eau",
+      "damage": 0
+    }
+  ]
+}

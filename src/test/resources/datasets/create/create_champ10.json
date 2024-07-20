@@ -1,0 +1,11 @@
+{
+  "championName": "Champ10",
+  "role": "MAGE",
+  "lifePoints": 100,
+  "abilities": [
+    {
+      "ability": "sort de feu",
+      "damage": 42
+    }
+  ]
+}

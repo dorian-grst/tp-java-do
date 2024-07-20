@@ -1,0 +1,11 @@
+{
+  "championName": "Pantheon",
+  "role": "COMBATTANT",
+  "lifePoints": 110,
+  "abilities": [
+    {
+      "ability": "coup de lance",
+      "damage": 30
+    }
+  ]
+}

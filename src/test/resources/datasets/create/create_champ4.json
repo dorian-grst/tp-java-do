@@ -1,0 +1,11 @@
+{
+  "championName": "Champ4",
+  "role": "SUPPORT",
+  "lifePoints": 100,
+  "abilities": [
+    {
+      "ability": "attaque",
+      "damage": 20
+    }
+  ]
+}
