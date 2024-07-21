@@ -55,14 +55,13 @@ class UseCase1_1IntegrationTest {
 
     @Test
     void test_create_KO_invalid_json() throws IOException {
-        String invalidLifepoints = new String(Files.readAllBytes(Paths.get(SRC_TEST_RESOURCES_DATASETS + "create_invalid_wrong_lifepoints.json")));
-        String invalidType = new String(Files.readAllBytes(Paths.get(SRC_TEST_RESOURCES_DATASETS + "create_invalid_wrong_type.json")));
+        String invalidLifepoints = new String(Files.readAllBytes(Paths.get(SRC_TEST_RESOURCES_DATASETS + "create_invalid_lifepoints.json")));
+        String invalidRole = new String(Files.readAllBytes(Paths.get(SRC_TEST_RESOURCES_DATASETS + "create_invalid_role.json")));
 
         JavalinTest.test(app, (server, client) -> {
             assertThat(client.post(CREATE_URL, invalidLifepoints).code()).isEqualTo(400);
-            assertThat(client.post(CREATE_URL, invalidType).code()).isEqualTo(400);
+            assertThat(client.post(CREATE_URL, invalidRole).code()).isEqualTo(400);
         });
-
     }
 
 
