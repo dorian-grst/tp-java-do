@@ -35,7 +35,7 @@ class UseCase4IntegrationTest {
             // WHEN
             Response response = client.get(PREDICT_WINNER_URL);
             assertThat(response.code()).isEqualTo(200);
-            assertThat(parseResponse(response).getJSONObject(0).toString()).is(isJsonEquals(prediction));
+            assertThat(parseResponse(response).toString()).is(isJsonEquals(prediction));
         });
     }
 

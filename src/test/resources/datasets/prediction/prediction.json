@@ -1,20 +1,18 @@
-{
-  "result": [
+[
     {
       "laneName": "TOP",
       "winningTeam": "RED"
     },
     {
-      "name": "JUNGLER",
+      "laneName": "JUNGLER",
       "winningTeam": "BLUE"
     },
     {
-      "name": "MID",
+      "laneName": "MID",
       "winningTeam": "BLUE"
     },
     {
-      "name": "BOT",
+      "laneName": "BOT",
       "winningTeam": "RED"
     }
   ]
-}

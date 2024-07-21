@@ -152,12 +152,12 @@ public class ServerJava {
 
     private List<Map<String, Object>> calculatePredictions() {
         List<Map<String, Object>> predictions = new ArrayList<>();
-        Map<String, Champion> blueChampions = getChampionsByLane(game.getBlueTeam());
-        Map<String, Champion> redChampions = getChampionsByLane(game.getRedTeam());
+        Map<String, List<Champion>> blueChampions = getChampionsByLane(game.getBlueTeam());
+        Map<String, List<Champion>> redChampions = getChampionsByLane(game.getRedTeam());
 
         for (Lane lane : Lane.values()) {
-            Champion blueChampion = blueChampions.get(lane.name());
-            Champion redChampion = redChampions.get(lane.name());
+            List<Champion> blueChampion = blueChampions.get(lane.name());
+            List<Champion> redChampion = redChampions.get(lane.name());
 
             TeamName winningTeam = calculateLaneWinner(blueChampion, redChampion);
 
@@ -170,21 +170,39 @@ public class ServerJava {
         return predictions;
     }
 
-    private Map<String, Champion> getChampionsByLane(Team team) {
-        Map<String, Champion> championsByLane = new HashMap<>();
+    private Map<String, List<Champion>> getChampionsByLane(Team team) {
+        Map<String, List<Champion>> championsByLane = new HashMap<>();
         for (ChampionDistribution cd : team.getChampionsDistribution()) {
-            championsByLane.put(cd.getLane().toString(), champions.get(cd.getChampionName().toLowerCase()));
+            if (championsByLane.containsKey(cd.getLane().toString())) {
+                championsByLane.get(cd.getLane().toString()).add(champions.get(cd.getChampionName().toLowerCase()));
+            } else {
+                List<Champion> championList = new ArrayList<>();
+                championList.add(champions.get(cd.getChampionName().toLowerCase()));
+                championsByLane.put(cd.getLane().toString(), championList);
+            }
+
         }
         return championsByLane;
     }
 
-    private TeamName calculateLaneWinner(Champion blueChampion, Champion redChampion) {
-        if (blueChampion == null || redChampion == null) {
+    private TeamName calculateLaneWinner(List<Champion> blueChampion, List<Champion> redChampion) {
+        if (blueChampion == null || redChampion == null || blueChampion.isEmpty() || redChampion.isEmpty()) {
             return blueChampion == null ? TeamName.RED : TeamName.BLUE;
         }
-
-        int blueHitsToKill = (int) Math.ceil((double) redChampion.getLifePoints() / blueChampion.getStrongestAbilityDamage());
-        int redHitsToKill = (int) Math.ceil((double) blueChampion.getLifePoints() / redChampion.getStrongestAbilityDamage());
+        int redLifePoint = 0;
+        int redDamage = 0;
+        int blueLifePoint = 0;
+        int blueDamage = 0;
+        for (Champion champion : blueChampion) {
+            blueDamage += champion.getStrongestAbilityDamage();
+            blueLifePoint += champion.getLifePoints();
+        }
+        for (Champion champion : redChampion) {
+            redDamage += champion.getStrongestAbilityDamage();
+            redLifePoint += champion.getLifePoints();
+        }
+        int blueHitsToKill = (int) Math.ceil((double) redLifePoint / blueDamage);
+        int redHitsToKill = (int) Math.ceil((double) blueLifePoint / redDamage);
 
         return blueHitsToKill <= redHitsToKill ? TeamName.BLUE : TeamName.RED;
     }
