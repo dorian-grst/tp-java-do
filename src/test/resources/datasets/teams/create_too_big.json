@@ -2,6 +2,10 @@
   "teamName": "RED",
   "championsDistribution": [
     {
+      "championName": "Champ5",
+      "lane": "MID"
+    },
+    {
       "championName": "Champ6",
       "lane": "TOP"
     },
